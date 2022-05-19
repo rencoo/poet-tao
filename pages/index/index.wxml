@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="container-background"></view>
+  <view class="poet-info">
+    <image class="userinfo-avatar" src="../../images/avatar.jpg" mode="cover"></image>
+    <text class="poet-nickname">陶老师</text>
+    <view class="poet-resume">哲学家、豆瓣诗人</view>
+    <view class="more-info">更多资料</view>
+  </view>
+  <view class="poet-portfolio">
+    <view class="portfolio-header">诗集</view>
+    <view class="portfolio-poems">
+      <view class="poem-item">
+        <view class="poem-title">无名</view>
+        <view class="poem-content">在那样潦原浸天的北方</view>
+      </view>
+      <view class="poem-item">
+        <view class="poem-title">无名</view>
+        <view class="poem-content">在那样潦原浸天的北方</view>
+      </view>
+      <view class="poem-item">
+        <view class="poem-title">无名</view>
+        <view class="poem-content">在那样潦原浸天的北方</view>
+      </view>
+      <view class="poem-item">
+        <view class="poem-title">无名</view>
+        <view class="poem-content">在那样潦原浸天的北方</view>
+      </view>
+       <view class="poem-item">
+        <view class="poem-title">无名</view>
+        <view class="poem-content">在那样潦原浸天的北方</view>
+      </view>
+       <view class="poem-item">
+        <view class="poem-title">无名</view>
+        <view class="poem-content">在那样潦原浸天的北方</view>
+      </view>
+       <view class="poem-item">
+        <view class="poem-title">无名</view>
+        <view class="poem-content">在那样潦原浸天的北方</view>
+      </view>
+    </view>
+  </view>
+  <view class="end">
+    没有更多内容
+  </view>
+</view>

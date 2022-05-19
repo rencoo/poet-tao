@@ -1,0 +1,86 @@
+/**index.wxss**/
+.container {
+  color: #fff;
+}
+
+.container-background {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: -9999;
+  background-color: #000;
+}
+
+.poet-info {
+  padding-top: 150rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poet-nickname {
+  color: #fff;
+  /* font-size: 16px; */
+  font-weight: 600;
+}
+
+.poet-resume {
+  margin-top: 6px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.more-info {
+  margin-top: 6px;
+  color: #aaa;
+  font-size: 14px;
+  border-bottom: 1px solid #aaa;
+}
+
+.userinfo-avatar {
+  overflow: hidden;
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.poet-portfolio {
+  margin-top: 250rpx;
+}
+
+.portfolio-header {
+  border-radius: 20px 20px 0 0;
+  padding: 8px 20px;
+  border-bottom: 1px solid #2e2e2e;
+  font-weight: 600;
+  font-size: 20px;
+  background-color: #121212;
+}
+
+.poem-item {
+  padding: 20px;
+  background-color: #121212;
+}
+
+.poem-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.poem-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.poem-content {
+  font-size: 16px;
+  margin-top: 8px;
+  color: #d3d3d3;
+}
+
+.end {
+  margin: 30px 0;
+  text-align: center;
+}
