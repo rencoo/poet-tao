@@ -1,0 +1,39 @@
+/* pages/poem/poem.wxss */
+.container {
+  color: #fff;
+}
+
+.container-background {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: -9999;
+  background-color: #000;
+}
+
+.poem-detail {
+  padding: 15px;
+  background-color: #121212;
+}
+
+.poem-info {
+  display: flex;
+  align-items: center;
+}
+
+.poem-creator-avatar {
+  overflow: hidden;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+
+.poem-create-info {
+  flex: 1;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.poem-create-time {
+  color: #aaa;
+}

@@ -1,0 +1,17 @@
+<!--poem.wxml-->
+<view class="container">
+  <view class="container-background"></view>
+  <!-- <view class="poem-action"></view> -->
+  <view class="poem-detail">
+    <view class="poem-info">
+      <image class="poem-creator-avatar" src="../../images/avatar.jpg" mode="cover"></image>
+        <view class="poem-create-info">
+          <view>{{poem.author}}</view>
+          <view class="poem-create-time">{{poem.created_at}}</view>
+        </view>
+    </view>
+    <view class="poem-content">
+      
+    </view>
+  </view>
+</view>

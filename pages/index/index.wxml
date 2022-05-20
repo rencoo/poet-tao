@@ -1,43 +1,50 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container {{isShowProfile?'container-fixed':''}}">
   <view class="container-background"></view>
-  <view class="poet-info">
+  <view class="profile-container" wx:if="{{isShowProfile}}">
+    <view class="profile-action">
+      <text class="close-btn" bindtap="onHideProfile">✕</text>
+    </view>
+    <!-- 内容往上滚时，需要自动吸顶 -->
+    <view class="profile-content">
+      <view class="profile-title">陶老师</view>
+      <view>
+        <text>常居地: </text>
+        <text>南京</text>
+      </view>
+      <view>关于</view>
+      <view class="about-content">
+        对作业过敏。\n\n\n\n我们武断彼此、知识和世界。\n真实藏在一切突发的卡顿里。\n\n天生臭脸综合症\n悲观主义的花朵\n重度失眠患者\n无聊革命家\n病娇\n克制又疯批\n赖赖唧唧\n明目张胆，深情款款\n\n一个糟糕的人类样本\n\nJe est un autre
+        \n\n\n\n~~
+        \n\n\n\n~~
+        \n\n\n\n~~
+      </view>
+    </view>
+  </view>
+  <view class="userinfo">
     <image class="userinfo-avatar" src="../../images/avatar.jpg" mode="cover"></image>
-    <text class="poet-nickname">陶老师</text>
-    <view class="poet-resume">哲学家、豆瓣诗人</view>
-    <view class="more-info">更多资料</view>
+    <text class="user-nickname">{{poetInfo.nickName}}</text>
+    <view class="user-resume">{{poetInfo.resume}}</view>
+    <!-- <navigator url="../profile/profile" class="user-more-info">更多资料</navigator> -->
+    <view class="user-more-info" bindtap="onShowProfile">更多资料</view>
   </view>
   <view class="poet-portfolio">
-    <view class="portfolio-header">诗集</view>
+    <!-- tabList -->
+    <view class="portfolio-header">主页 | 诗集</view>
     <view class="portfolio-poems">
-      <view class="poem-item">
-        <view class="poem-title">无名</view>
-        <view class="poem-content">在那样潦原浸天的北方</view>
-      </view>
-      <view class="poem-item">
-        <view class="poem-title">无名</view>
-        <view class="poem-content">在那样潦原浸天的北方</view>
-      </view>
-      <view class="poem-item">
-        <view class="poem-title">无名</view>
-        <view class="poem-content">在那样潦原浸天的北方</view>
-      </view>
-      <view class="poem-item">
-        <view class="poem-title">无名</view>
-        <view class="poem-content">在那样潦原浸天的北方</view>
-      </view>
-       <view class="poem-item">
-        <view class="poem-title">无名</view>
-        <view class="poem-content">在那样潦原浸天的北方</view>
-      </view>
-       <view class="poem-item">
-        <view class="poem-title">无名</view>
-        <view class="poem-content">在那样潦原浸天的北方</view>
-      </view>
-       <view class="poem-item">
-        <view class="poem-title">无名</view>
-        <view class="poem-content">在那样潦原浸天的北方</view>
-      </view>
+      <navigator url="../poem/poem" class="poem-item" wx:for="{{poemList}}" wx:for-item="poem" wx:for-index="idx">
+        <view class="poem-info">
+          <image class="poem-creator-avatar" src="../../images/avatar.jpg" mode="cover"></image>
+          <view class="poem-create-info">
+            <view>{{poem.author}}</view>
+            <view class="poem-create-time">{{poem.created_at}}</view>
+          </view>
+        </view>
+        <view class="poem-detail">
+          <view class="poem-title">{{poem.title || '无名'}}</view>
+          <view class="poem-content ellipsis-three">{{poem.content}}</view>
+        </view>
+      </navigator>
     </view>
   </view>
   <view class="end">

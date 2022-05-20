@@ -3,6 +3,15 @@
   color: #fff;
 }
 
+/* 禁止滚动 */
+.container-fixed {
+  position: fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+}
+
 .container-background {
   position: fixed;
   width: 100%;
@@ -11,31 +20,56 @@
   background-color: #000;
 }
 
-.poet-info {
+/* profile */
+.profile-container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.9);
+  /* 允许浮层滚动 */
+  overflow-y: scroll;
+}
+
+.profile-action {
+  padding: 0 15px;
+  font-size: 20px;
+  font-weight: 600;
+  position: fixed;
+  top: 0;
+}
+
+.profile-content {
+  padding: 15px;
+  padding-top: 40px;
+}
+
+.ellipsis-three {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-break: break-all;
+}
+
+.profile-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.about-content {
+  white-space: pre-line;
+}
+
+/* 用户信息 */
+.userinfo {
   padding-top: 150rpx;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.poet-nickname {
-  color: #fff;
-  /* font-size: 16px; */
-  font-weight: 600;
-}
-
-.poet-resume {
-  margin-top: 6px;
-  color: #aaa;
-  font-size: 14px;
-}
-
-.more-info {
-  margin-top: 6px;
-  color: #aaa;
-  font-size: 14px;
-  border-bottom: 1px solid #aaa;
 }
 
 .userinfo-avatar {
@@ -47,13 +81,33 @@
   border: 2px solid #fff;
 }
 
+.user-nickname {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.user-resume {
+  margin-top: 6px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.user-more-info {
+  margin-top: 6px;
+  color: #aaa;
+  font-size: 14px;
+  border-bottom: 1px solid #aaa;
+}
+
+/* 内容 */
 .poet-portfolio {
   margin-top: 250rpx;
 }
 
 .portfolio-header {
   border-radius: 20px 20px 0 0;
-  padding: 8px 20px;
+  padding: 8px 15px;
   border-bottom: 1px solid #2e2e2e;
   font-weight: 600;
   font-size: 20px;
@@ -61,12 +115,38 @@
 }
 
 .poem-item {
-  padding: 20px;
+  padding: 15px;
   background-color: #121212;
 }
 
 .poem-item:not(:last-child) {
   margin-bottom: 10px;
+}
+
+.poem-info {
+  display: flex;
+  align-items: center;
+}
+
+.poem-creator-avatar {
+  overflow: hidden;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+
+.poem-create-info {
+  flex: 1;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.poem-create-time {
+  color: #aaa;
+}
+
+.poem-detail {
+  margin-top: 10px;
 }
 
 .poem-title {
