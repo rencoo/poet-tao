@@ -1,33 +1,51 @@
 // index.js
 // 获取应用实例
 const app = getApp();
+const { getPoemList } = require('../../utils/api');
 
 Page({
+  // 页面或组件的 data 字段，应用来存放和页面或组件渲染相关的数据（即直接在 wxml 中出现的字段）
   data: {
     poetInfo: {
       nickName: '陶老师',
       resume: '哲学家、豆瓣诗人'
     },
-    poemList: [
+    scrollTop: 0,
+    tabList: [
       {
-        title: '', // 默认为无名
-        content: '在那样潦原浸天的北方癸地，我曾遇上一双恶鬼的眼睛。\n本以为他獠牙青面、凶恶狰狞，抬眼却簪星曳月、华服美衣。\n此后北国碎琼乱玉，心中戛玉敲冰，道袍袖口撕扯出难愈的疾。\n真的，我曾试图千万次定住自己的心，没用，他们说吗，这叫天命', //
-        author: '陶老师',
-        created_at: '2021-05-20', // 今年的日期格式:05-20, 昨天的格式: 昨天
-        updated_at: ''
+        value: 'home',
+        label: '主页'
       },
       {
-        title: '', // 默认为无名
-        content: '在那样潦原浸天的北方', //
-        author: '陶老师',
-        created_at: '2021-05-20', // 今年的日期格式:05-20, 昨天的格式: 昨天
-        updated_at: ''
+        value: 'poem',
+        label: '诗集'
       }
     ],
+    activeTab: 'home',
+    poemList: [],
+    total: 0,
     // 展示 profile
-    isShowProfile: false
+    isShowProfile: false,
+    // 正在加载列表
+    isLoadingList: false,
+    // 是否是最后一页
+    isLastPage: false
   },
-  onLoad() {},
+  // 生命周期钩子
+  onLoad(params = {}) {
+    const that = this;
+    that._loadMore();
+  },
+  // 页面事件
+  // 监听用户下拉动作
+  onPullDownRefresh() {},
+  // 页面上拉触底事件
+  onReachBottom() {
+    console.log('===上拉触底===');
+    const that = this;
+    that._loadMore();
+  },
+  // 事件
   onShowProfile() {
     var that = this;
     that.setData({
@@ -39,5 +57,72 @@ Page({
     that.setData({
       isShowProfile: false
     });
+  },
+  onSelectTab(e) {
+    const that = this;
+    const { value } = e.currentTarget.dataset;
+    if (value === that.data.activeTab) {
+      return;
+    }
+
+    that.setData({
+      activeTab: value
+    });
+
+    if (value === 'poem') {
+      that._portfolioBodyScrollToTop();
+    }
+  },
+
+  // private
+  // 页面或组件渲染无关的数据，应挂在非 data 的字段下，如 this.userData = {userId: 'xxx'}；
+  _logicData: {
+    page: 0,
+    page_size: 9
+  },
+  // 内部函数
+  _loadMore() {
+    const that = this;
+    if (that.isLoadingList || that.data.isLastPage) {
+      // setData后立马生效
+      return;
+    }
+
+    that.setData({
+      isLoadingList: true
+    });
+
+    return getPoemList(++that._logicData.page, that._logicData.page_size).then(
+      (res) => {
+        if (res.code / 1 === 0 && res.data) {
+          const { page, page_size, count, items } = res.data;
+          if (page * page_size >= count) {
+            that.setData({ isLastPage: true });
+          }
+
+          that.setData({
+            poemList: that.data.poemList.concat(items),
+            isLoadingList: false,
+            total: count
+          });
+
+          // 更新page和page_size
+          that._logicData.page = page;
+          that._logicData.page_size = page_size;
+        }
+      }
+    );
+  },
+  _portfolioBodyScrollToTop() {
+    const that = this;
+    wx.createSelectorQuery().select('#viewPortfolioBody').boundingClientRect(function(rect) {
+      wx.pageScrollTo({
+        scrollTop: rect.height,
+        duration: 100 // 滑动速度
+      });
+      that.setData({
+        scrollTop: rect.height - that.data.scrollTop
+      });
+    }).exec();
   }
 });

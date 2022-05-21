@@ -28,15 +28,24 @@
     <!-- <navigator url="../profile/profile" class="user-more-info">更多资料</navigator> -->
     <view class="user-more-info" bindtap="onShowProfile">更多资料</view>
   </view>
-  <view class="poet-portfolio">
-    <!-- tabList -->
-    <view class="portfolio-header">主页 | 诗集</view>
+  <view class="poet-portfolio" id="viewPortfolioBody">
+    <view class="portfolio-header">
+      <!-- tabList -->
+      <scroll-view scroll-x="true" class="tab-list">
+        <block wx:for="{{tabList}}" wx:key="value">
+          <view class="tab-item {{item.value === activeTab?'active':''}}" data-value="{{item.value}}" data-index="{{index}}" bindtap="onSelectTab">
+            <text class="tab-text">{{item.label}}</text>
+          </view>
+        </block>
+      </scroll-view>
+      <view class="list-count" hidden="{{total === 0}}">{{total}}条</view>
+    </view>
     <view class="portfolio-poems">
-      <navigator url="../poem/poem" class="poem-item" wx:for="{{poemList}}" wx:for-item="poem" wx:for-index="idx">
+      <navigator url="../poem/poem?id={{poem.id}}" class="poem-item" wx:for="{{poemList}}" wx:for-item="poem" wx:for-index="idx" wx:key="id">
         <view class="poem-info">
           <image class="poem-creator-avatar" src="../../images/avatar.jpg" mode="cover"></image>
           <view class="poem-create-info">
-            <view>{{poem.author}}</view>
+            <view>{{poem.creator}}</view>
             <view class="poem-create-time">{{poem.created_at}}</view>
           </view>
         </view>
@@ -45,9 +54,11 @@
           <view class="poem-content ellipsis-three">{{poem.content}}</view>
         </view>
       </navigator>
+      <!-- 正在加载列表提示 -->
+      <view class="loading-list" hidden="{{!isLoadingList}}">正在加载中...</view>
     </view>
   </view>
-  <view class="end">
+  <view class="end" wx:if="{{isLastPage}}">
     没有更多内容
   </view>
 </view>

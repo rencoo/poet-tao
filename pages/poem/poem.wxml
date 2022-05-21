@@ -2,16 +2,17 @@
 <view class="container">
   <view class="container-background"></view>
   <!-- <view class="poem-action"></view> -->
-  <view class="poem-detail">
+  <view class="poem-container">
     <view class="poem-info">
       <image class="poem-creator-avatar" src="../../images/avatar.jpg" mode="cover"></image>
         <view class="poem-create-info">
-          <view>{{poem.author}}</view>
+          <view>{{poem.creator}}</view>
           <view class="poem-create-time">{{poem.created_at}}</view>
         </view>
     </view>
-    <view class="poem-content">
-      
+    <view class="poem-detail">
+      <view class="poem-title">{{poem.title || '无名'}}</view>
+      <view class="poem-content ellipsis-three">{{poem.content}}</view>
     </view>
   </view>
 </view>

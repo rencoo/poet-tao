@@ -11,7 +11,7 @@
   background-color: #000;
 }
 
-.poem-detail {
+.poem-container {
   padding: 15px;
   background-color: #121212;
 }
@@ -36,4 +36,19 @@
 
 .poem-create-time {
   color: #aaa;
+}
+
+.poem-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.poem-content {
+  font-size: 16px;
+  margin-top: 8px;
+  color: #d3d3d3;
+}
+
+.poem-content {
+  white-space: pre-line;
 }
