@@ -117,6 +117,8 @@
   border-bottom: 1px solid #2e2e2e;
   font-weight: 600;
   font-size: 20px;
+  /* 解决宽度超过手机屏幕 */
+  box-sizing: border-box;
 }
 
 .tab-item {

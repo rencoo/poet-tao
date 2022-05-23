@@ -45,6 +45,20 @@ Page({
     const that = this;
     that._loadMore();
   },
+  onPageScroll(e) {
+    const that = this;
+    wx.createSelectorQuery().select('#viewPortfolioBody').boundingClientRect(function(rect) {
+      if (rect.top <= 0) {
+        that.setData({
+          activeTab: 'poem'
+        });
+      } else {
+        that.setData({
+          activeTab: 'home'
+        });
+      }
+    }).exec();
+  },
   // 事件
   onShowProfile() {
     var that = this;
@@ -69,8 +83,16 @@ Page({
       activeTab: value
     });
 
-    if (value === 'poem') {
-      that._portfolioBodyScrollToTop();
+    if (value === 'home') {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 100 // 滑动速度
+      });
+      that.setData({
+        scrollTop: 0
+      });
+    } else { //value === 'poem'
+      that._scrollPortfolioBody2Top();
     }
   },
 
@@ -113,11 +135,24 @@ Page({
       }
     );
   },
-  _portfolioBodyScrollToTop() {
+  _scrollPortfolioBody2Top() {
     const that = this;
+    /**
+     * @See https://developers.weixin.qq.com/community/develop/doc/000aeec87c4d2811dc1ae8bd154c00
+     */
+    /** rect 对象属性
+      bottom: 2045
+      dataset: {}
+      height: 1652
+      id: "viewPortfolioBody"
+      left: 0
+      right: 390
+      top: 393
+      width: 390
+      */
     wx.createSelectorQuery().select('#viewPortfolioBody').boundingClientRect(function(rect) {
       wx.pageScrollTo({
-        scrollTop: rect.height,
+        scrollTop: rect.top,
         duration: 100 // 滑动速度
       });
       that.setData({
