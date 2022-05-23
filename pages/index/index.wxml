@@ -1,26 +1,32 @@
+<!-- templates -->
+<import src="../../templates/poem-list/poem-list.wxml"/>
 <!--index.wxml-->
 <view class="container {{isShowProfile?'container-fixed':''}}">
+  <!-- 背景 -->
   <view class="container-background"></view>
-  <view class="profile-container" wx:if="{{isShowProfile}}">
+  <scroll-view scroll-y="true" wx:if="{{isShowProfile}}" style="height: {{windowHeight}}px;" bindscroll="onPopupScroll" scroll-top="{{profileScrollTop}}"
+    class="profile-container">
     <view class="profile-action">
-      <text class="close-btn" bindtap="onHideProfile">✕</text>
+      <view class="close-btn" bindtap="onHideProfile">✕</view>
     </view>
     <!-- 内容往上滚时，需要自动吸顶 -->
     <view class="profile-content">
-      <view class="profile-title">陶老师</view>
-      <view>
+      <view class="profile-title">奥莉芙</view>
+      <view class="basic-info">
         <text>常居地: </text>
         <text>南京</text>
       </view>
-      <view>关于</view>
-      <view class="about-content">
-        对作业过敏。\n\n\n\n我们武断彼此、知识和世界。\n真实藏在一切突发的卡顿里。\n\n天生臭脸综合症\n悲观主义的花朵\n重度失眠患者\n无聊革命家\n病娇\n克制又疯批\n赖赖唧唧\n明目张胆，深情款款\n\n一个糟糕的人类样本\n\nJe est un autre
-        \n\n\n\n~~
-        \n\n\n\n~~
-        \n\n\n\n~~
+      <view class="about-container">
+        <view class="about-title" id="viewAboutBody">关于</view>
+        <view class="about-content">
+          对作业过敏。\n\n\n\n我们武断彼此、知识和世界。\n真实藏在一切突发的卡顿里。\n\n天生臭脸综合症\n悲观主义的花朵\n重度失眠患者\n无聊革命家\n病娇\n克制又疯批\n赖赖唧唧\n明目张胆，深情款款\n\n一个糟糕的人类样本\n\nJe est un autre
+          \n\n\n\n~~
+          \n\n\n\n~~
+          \n\n\n\n~~
+        </view>
       </view>
     </view>
-  </view>
+  </scroll-view>
   <view class="userinfo">
     <image class="userinfo-avatar" src="../../images/avatar.jpg" mode="cover"></image>
     <text class="user-nickname">{{poetInfo.nickName}}</text>
@@ -41,23 +47,12 @@
       <view class="list-count" hidden="{{total === 0}}">{{total}}条</view>
     </view>
     <view class="portfolio-poems">
-      <navigator url="../poem/poem?id={{poem.id}}" class="poem-item" wx:for="{{poemList}}" wx:for-item="poem" wx:for-index="idx" wx:key="id">
-        <view class="poem-info">
-          <image class="poem-creator-avatar" src="../../images/avatar.jpg" mode="cover"></image>
-          <view class="poem-create-info">
-            <view>{{poem.creator}}</view>
-            <view class="poem-create-time">{{poem.created_at}}</view>
-          </view>
-        </view>
-        <view class="poem-detail">
-          <view class="poem-title">{{poem.title || '无名'}}</view>
-          <view class="poem-content ellipsis-three">{{poem.content}}</view>
-        </view>
-      </navigator>
+      <template is="poem-list" data="{{poemList}}"></template>
       <!-- 正在加载列表提示 -->
       <view class="loading-list" hidden="{{!isLoadingList}}">正在加载中...</view>
     </view>
   </view>
+  <!-- 列表最后一页提示 -->
   <view class="end" wx:if="{{isLastPage}}">
     没有更多内容
   </view>

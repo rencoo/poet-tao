@@ -6,11 +6,15 @@ const { getPoemList } = require('../../utils/api');
 Page({
   // 页面或组件的 data 字段，应用来存放和页面或组件渲染相关的数据（即直接在 wxml 中出现的字段）
   data: {
+    // systemInfo
+    windowHeight: 0,
+    profileScrollTop: 0,
+    aboutOriginTop: 0,
     poetInfo: {
-      nickName: '陶老师',
+      nickName: '奥莉芙',
       resume: '哲学家、豆瓣诗人'
     },
-    scrollTop: 0,
+    // scrollTop: 0,
     tabList: [
       {
         value: 'home',
@@ -34,6 +38,10 @@ Page({
   // 生命周期钩子
   onLoad(params = {}) {
     const that = this;
+    /*获取屏幕高度*/
+    that.setData({
+        windowHeight: wx.getSystemInfoSync().windowHeight
+    });
     that._loadMore();
   },
   // 页面事件
@@ -65,6 +73,17 @@ Page({
     that.setData({
       isShowProfile: true
     });
+
+    const query = wx.createSelectorQuery();
+    query.select('#viewAboutBody').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      // res[0].top       // 节点的上边界坐标
+      // res[1].scrollTop // 显示区域的竖直滚动位置
+      that.setData({
+        aboutOriginTop: res[0].top
+      });
+    });
   },
   onHideProfile() {
     var that = this;
@@ -88,12 +107,14 @@ Page({
         scrollTop: 0,
         duration: 100 // 滑动速度
       });
-      that.setData({
-        scrollTop: 0
-      });
     } else { //value === 'poem'
       that._scrollPortfolioBody2Top();
     }
+  },
+  onPopupScroll(e) {
+    const that = this;
+    const deltaY = e.detail.deltaY;
+    const scrollTop = e.detail.scrollTop;
   },
 
   // private
@@ -138,8 +159,20 @@ Page({
   _scrollPortfolioBody2Top() {
     const that = this;
     /**
-     * @See https://developers.weixin.qq.com/community/develop/doc/000aeec87c4d2811dc1ae8bd154c00
+     * @See https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createSelectorQuery.html、https://developers.weixin.qq.com/community/develop/doc/000aeec87c4d2811dc1ae8bd154c00
      */
+    const query = wx.createSelectorQuery();
+    query.select('#viewPortfolioBody').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      // res[0].top       // 节点的上边界坐标
+      // res[1].scrollTop // 显示区域的竖直滚动位置
+      wx.pageScrollTo({
+        scrollTop: res[0].top,
+        duration: 100 // 滑动速度
+      });
+    });
+    // 旧写法
     /** rect 对象属性
       bottom: 2045
       dataset: {}
@@ -150,14 +183,11 @@ Page({
       top: 393
       width: 390
       */
-    wx.createSelectorQuery().select('#viewPortfolioBody').boundingClientRect(function(rect) {
-      wx.pageScrollTo({
-        scrollTop: rect.top,
-        duration: 100 // 滑动速度
-      });
-      that.setData({
-        scrollTop: rect.height - that.data.scrollTop
-      });
-    }).exec();
+    // wx.createSelectorQuery().select('#viewPortfolioBody').boundingClientRect(function(rect) {
+    //   wx.pageScrollTo({
+    //     scrollTop: rect.top,
+    //     duration: 100 // 滑动速度
+    //   });
+    // }).exec();
   }
 });

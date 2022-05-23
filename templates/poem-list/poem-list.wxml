@@ -1,0 +1,24 @@
+<!-- @see https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/template.html -->
+<!-- 纯渲染组件适合用template -->
+<template name="poem1">
+  <navigator url="../poem/poem?id={{poem.id}}" class="poem-item">
+    <view class="poem-info">
+      <image class="poem-creator-avatar" src="../../images/avatar.jpg" mode="cover"></image>
+      <view class="poem-create-info">
+        <view>{{poem.creator}}</view>
+        <view class="poem-create-time">{{poem.created_at}}</view>
+      </view>
+    </view>
+    <view class="poem-detail">
+      <view class="poem-title">{{poem.title || '无名'}}</view>
+      <view class="poem-content ellipsis-three">{{poem.content}}</view>
+    </view>
+  </navigator>
+</template>
+
+<template name="poem-list">
+  <block wx:for="{{poemList}}" wx:for-item="poem" wx:key="id">
+    <template is="poem1" data="{{poem, index}}">
+    </template>
+  </block>
+</template>

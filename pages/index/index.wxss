@@ -1,3 +1,6 @@
+/**templates 样式**/
+@import '../../templates/poem-list/poem-list.wxss';
+
 /**index.wxss**/
 .container {
   color: #fff;
@@ -28,10 +31,12 @@
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.9);
   /* 允许浮层滚动 */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .profile-action {
+  width: 100%;
+  box-sizing: border-box;
   padding: 0 15px;
   font-size: 20px;
   font-weight: 600;
@@ -39,9 +44,14 @@
   top: 0;
 }
 
+.close-btn {
+  padding-top: 15px;
+  background-color: #000;
+}
+
 .profile-content {
   padding: 15px;
-  padding-top: 40px;
+  padding-top: 60px;
 }
 
 .ellipsis-three {
@@ -55,7 +65,25 @@
 }
 
 .profile-title {
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.basic-info {
+  margin-top: 20px;
+}
+
+.about-container {
+  margin-top: 30px;
+}
+
+.about-title {
+  position: sticky;
+  top: 43px;
+}
+
+.about-title {
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -83,7 +111,7 @@
 
 .user-nickname {
   color: #fff;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
 }
 
@@ -139,54 +167,6 @@
 .list-count {
   padding: 8px 15px;
 }
-
-.poem-item {
-  padding: 15px;
-  background-color: #121212;
-}
-
-.poem-item:not(:last-child) {
-  margin-bottom: 10px;
-}
-
-/* 单条poem */
-.poem-info {
-  display: flex;
-  align-items: center;
-}
-
-.poem-creator-avatar {
-  overflow: hidden;
-  width: 70rpx;
-  height: 70rpx;
-  border-radius: 50%;
-}
-
-.poem-create-info {
-  flex: 1;
-  font-size: 12px;
-  padding-left: 10px;
-}
-
-.poem-create-time {
-  color: #aaa;
-}
-
-.poem-detail {
-  margin-top: 10px;
-}
-
-.poem-title {
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.poem-content {
-  font-size: 16px;
-  margin-top: 8px;
-  color: #d3d3d3;
-}
-/* 单条poem */
 
 .loading-list {
   margin: 30px 0;
